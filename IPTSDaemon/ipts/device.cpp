@@ -21,7 +21,7 @@ Device::~Device() {
 
 void Device::reset() {
     disconnect_from_kernel();
-    sleep(2);
+    sleep(3);
     connect_to_kernel();
 }
 
@@ -41,15 +41,19 @@ void Device::connect_to_kernel()
     if (ret != kIOReturnSuccess)
         throw common::cerror("Failed to establish a connection to the driver");
 
-    IPTSDeviceInfo info;
-    size_t info_size = sizeof(IPTSDeviceInfo);
-    ret = IOConnectCallStructMethod(connect, kMethodGetDeviceInfo, nullptr, 0, &info, &info_size);
-    if (ret != kIOReturnSuccess)
-        throw common::cerror("Failed to get IPTS device info from driver");
-    vendor_id = info.vendor_id;
-    product_id = info.product_id;
-    if (info.meta_data.size.rows != -1)
-        meta_data = info.meta_data;
+    if (initial) {
+        IPTSDeviceInfo info;
+        size_t info_size = sizeof(IPTSDeviceInfo);
+        ret = IOConnectCallStructMethod(connect, kMethodGetDeviceInfo, nullptr, 0, &info, &info_size);
+        if (ret != kIOReturnSuccess)
+            throw common::cerror("Failed to get IPTS device info from driver");
+        vendor_id = info.vendor_id;
+        product_id = info.product_id;
+        if (info.meta_data.size.rows != -1)
+            meta_data = info.meta_data;
+        
+        initial = false;
+    }
     
     uint64_t size;
     ret = IOConnectMapMemory(connect, 0, mach_task_self(), &input_buffer, &size, kIOMapAnywhere | kIOMapInhibitCache);
@@ -66,8 +70,8 @@ void Device::disconnect_from_kernel()
 }
 
 gsl::span<u8> Device::read() {
-    UInt64 input_size = 0;
-    UInt32 cnt = 1;
+    uint64_t input_size = 0;
+    uint32_t cnt = 1;
     kern_return_t ret = IOConnectCallScalarMethod(connect, kMethodReceiveInput, nullptr, 0, &input_size, &cnt);
     should_reinit = input_size == -1;
     if (ret != kIOReturnSuccess || should_reinit) {
@@ -86,7 +90,7 @@ void Device::send_hid_report(IPTSHIDReport &report) {
 void Device::process_begin() {
     if (!processing) {
         processing = true;
-        UInt64 status = 1;
+        uint64_t status = 1;
         kern_return_t ret = IOConnectCallScalarMethod(connect, kMethodToggleProcessingStatus, &status, 1, nullptr, nullptr);
         if (ret != kIOReturnSuccess)
             throw common::cerror("Failed to acquire input lock!");
@@ -96,7 +100,7 @@ void Device::process_begin() {
 void Device::process_end() {
     if (processing) {
         processing = false;
-        UInt64 status = 0;
+        uint64_t status = 0;
         kern_return_t ret = IOConnectCallScalarMethod(connect, kMethodToggleProcessingStatus, &status, 1, nullptr, nullptr);
         if (ret != kIOReturnSuccess)
             throw common::cerror("Failed to release input lock!");

@@ -40,7 +40,8 @@ public:
 private:    
     io_connect_t connect;
     io_service_t service;
-    bool processing {false};
+    bool processing = false;
+    bool initial = true;
     
     void connect_to_kernel();
     void disconnect_from_kernel();
