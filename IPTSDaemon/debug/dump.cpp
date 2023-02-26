@@ -1,11 +1,9 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #include <common/signal.hpp>
-#include <hid/device.hpp>
 #include <ipts/device.hpp>
 #include <ipts/protocol.hpp>
 
-#include <CLI/CLI.hpp>
 #include <cstddef>
 #include <cstdint>
 #include <cstdio>
@@ -90,23 +88,11 @@ namespace iptsd::debug::dump {
 struct iptsd_dump_header {
 	i16 vendor;
 	i16 product;
-	std::size_t buffer_size;
 };
 
-static int main(gsl::span<char *> args)
+static int main(char *dump_file)
 {
-	CLI::App app {};
-	std::filesystem::path path;
-	std::filesystem::path filename;
-
-	app.add_option("DEVICE", path, "The hidraw device to read from.")
-		->type_name("FILE")
-		->required();
-
-	app.add_option("OUTPUT", filename, "Output binary data to this file in addition to stdout.")
-		->type_name("FILE");
-
-	CLI11_PARSE(app, args.size(), args.data());
+	std::filesystem::path filename(dump_file);
 
 	std::atomic_bool should_exit = false;
 
@@ -119,59 +105,43 @@ static int main(gsl::span<char *> args)
 		file.open(filename, std::ios::out | std::ios::binary);
 	}
 
-	ipts::Device dev {path};
+    ipts::Device dev;
 
-	// Get the buffer size from the HID descriptor
-	std::size_t buffer_size = dev.buffer_size();
-	std::vector<u8> buffer(buffer_size);
-
-	// Get device metadata
-	auto meta = dev.get_metadata();
-
+    auto &meta = dev.meta_data;
 	if (file) {
 		struct iptsd_dump_header header {};
-		header.vendor = dev.vendor();
-		header.product = dev.product();
-		header.buffer_size = buffer_size;
+		header.vendor = dev.vendor_id;
+        header.product = dev.product_id;
 
-		// NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
 		file.write(reinterpret_cast<char *>(&header), sizeof(header));
 		char has_meta = meta.has_value() ? 1 : 0;
-
 		file.write(&has_meta, sizeof(has_meta));
 
 		if (meta.has_value()) {
 			auto m = meta.value();
-
-			// NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
 			file.write(reinterpret_cast<char *>(&m), sizeof(m));
 		}
 	}
 
-	spdlog::info("Vendor:       {:04X}", dev.vendor());
-	spdlog::info("Product:      {:04X}", dev.product());
-	spdlog::info("Buffer Size:  {}", buffer_size);
+	spdlog::info("Vendor:       {:04X}", dev.vendor_id);
+	spdlog::info("Product:      {:04X}", dev.product_id);
 
 	if (meta.has_value()) {
 		auto &t = meta->transform;
-		auto &u = meta->unknown.unknown;
+		auto &u = meta->unknown2;
 
 		spdlog::info("Metadata:");
 		spdlog::info("rows={}, columns={}", meta->size.rows, meta->size.columns);
 		spdlog::info("width={}, height={}", meta->size.width, meta->size.height);
 		spdlog::info("transform=[{},{},{},{},{},{}]", t.xx, t.yx, t.tx, t.xy, t.yy, t.ty);
 		spdlog::info("unknown={}, [{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}]",
-			     meta->unknown_byte, u[0], u[1], u[2], u[3], u[4], u[5], u[6], u[7],
+			     meta->unknown1, u[0], u[1], u[2], u[3], u[4], u[5], u[6], u[7],
 			     u[8], u[9], u[10], u[11], u[12], u[13], u[14], u[15]);
 	}
 
 	// Count errors, if we receive 50 continuous errors, chances are pretty good that
 	// something is broken beyond repair and the program should exit.
 	i32 errors = 0;
-
-	// Enable multitouch mode
-	dev.set_mode(true);
-
 	while (!should_exit) {
 		if (errors >= 50) {
 			spdlog::error("Encountered 50 continuous errors, aborting...");
@@ -179,24 +149,22 @@ static int main(gsl::span<char *> args)
 		}
 
 		try {
-			ssize_t size = dev.read(buffer);
-
-			if (!dev.is_touch_data(buffer[0]))
-				continue;
+            gsl::span<u8> buffer = dev.read();
+            auto size = buffer.size();
+            
+            dev.process_begin();
 
 			if (file) {
-				// NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
 				file.write(reinterpret_cast<char *>(&size), sizeof(size));
-
-				// NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
-				file.write(reinterpret_cast<char *>(buffer.data()),
-					   gsl::narrow<std::streamsize>(buffer_size));
+				file.write(reinterpret_cast<char *>(buffer.data()), gsl::narrow<std::streamsize>(size));
 			}
-
-			const gsl::span<const u8> buf(buffer.data(), size);
+            
+            const gsl::span<const u8> buf(buffer.data(), size);
 
 			spdlog::info("== Size: {} ==", size);
 			spdlog::info("{:ox}", buf);
+            
+            dev.process_end();
 		} catch (std::exception &e) {
 			spdlog::warn(e.what());
 			errors++;
@@ -207,9 +175,6 @@ static int main(gsl::span<char *> args)
 		errors = 0;
 	}
 
-	// Disable multitouch mode
-	dev.set_mode(false);
-
 	return 0;
 }
 
@@ -217,10 +182,13 @@ static int main(gsl::span<char *> args)
 
 int main(int argc, char *argv[])
 {
+    if (argc != 2)
+        return -1;
+    
 	spdlog::set_pattern("[%X.%e] [%^%l%$] %v");
 
 	try {
-		return iptsd::debug::dump::main(gsl::span<char *>(argv, argc));
+		return iptsd::debug::dump::main(argv[1]);
 	} catch (std::exception &e) {
 		spdlog::error(e.what());
 		return EXIT_FAILURE;

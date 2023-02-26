@@ -8,7 +8,6 @@
 #include <container/image.hpp>
 #include <ipts/parser.hpp>
 
-#include <CLI/CLI.hpp>
 #include <algorithm>
 #include <chrono>
 #include <exception>
@@ -28,7 +27,6 @@ namespace iptsd::debug::perf {
 struct iptsd_dump_header {
 	i16 vendor;
 	i16 product;
-	std::size_t buffer_size;
 };
 
 static void iptsd_perf_handle_input(contacts::ContactFinder &finder, const ipts::Heatmap &data)
@@ -48,37 +46,24 @@ static void iptsd_perf_handle_input(contacts::ContactFinder &finder, const ipts:
 	finder.search();
 }
 
-static int main(gsl::span<char *> args)
+static int main(char *dump_file)
 {
-	CLI::App app {};
-	std::filesystem::path path;
+	std::filesystem::path path(dump_file);
 	u32 runs = 10;
-
-	app.add_option("DATA", path, "The binary data file containing the data to test.")
-		->type_name("FILE")
-		->required();
-	app.add_option("RUNS", runs, "Repeat this number of runs through the data.")
-		->check(CLI::Range(1, 1000));
-
-	CLI11_PARSE(app, args.size(), args.data());
 
 	std::ifstream ifs {};
 	ifs.open(path, std::ios::in | std::ios::binary);
 
 	struct iptsd_dump_header header {};
-
-	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
 	ifs.read(reinterpret_cast<char *>(&header), sizeof(header));
 
 	char has_meta = 0;
 	ifs.read(&has_meta, sizeof(has_meta));
 
 	// Read metadata
-	std::optional<ipts::Metadata> meta = std::nullopt;
+	std::optional<IPTSDeviceMetaData> meta = std::nullopt;
 	if (has_meta) {
-		ipts::Metadata m {};
-
-		// NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
+        IPTSDeviceMetaData m {};
 		ifs.read(reinterpret_cast<char *>(&m), sizeof(m));
 
 		meta = m;
@@ -86,19 +71,18 @@ static int main(gsl::span<char *> args)
 
 	spdlog::info("Vendor:       {:04X}", header.vendor);
 	spdlog::info("Product:      {:04X}", header.product);
-	spdlog::info("Buffer Size:  {}", header.buffer_size);
 
 	if (meta.has_value()) {
 		const auto &m = meta;
 		auto &t = m->transform;
-		auto &u = m->unknown.unknown;
+		auto &u = m->unknown2;
 
 		spdlog::info("Metadata:");
 		spdlog::info("rows={}, columns={}", m->size.rows, m->size.columns);
 		spdlog::info("width={}, height={}", m->size.width, m->size.height);
 		spdlog::info("transform=[{},{},{},{},{},{}]", t.xx, t.yx, t.tx, t.xy, t.yy, t.ty);
 		spdlog::info("unknown={}, [{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}]",
-			     m->unknown_byte, u[0], u[1], u[2], u[3], u[4], u[5], u[6], u[7], u[8],
+			     m->unknown1, u[0], u[1], u[2], u[3], u[4], u[5], u[6], u[7], u[8],
 			     u[9], u[10], u[11], u[12], u[13], u[14], u[15]);
 	}
 
@@ -155,10 +139,8 @@ static int main(gsl::span<char *> args)
 
 				if (reader.size() < size)
 					break;
-				if (size > header.buffer_size)
-					break;
 				gsl::span<u8> data = reader.subspan(0, size);
-				reader = reader.subspan(header.buffer_size);
+				reader = reader.subspan(size);
 
 				// Take start time
 				auto start = clock::now();
@@ -210,10 +192,13 @@ static int main(gsl::span<char *> args)
 
 int main(int argc, char *argv[])
 {
+    if (argc != 2)
+        return -1;
+    
 	spdlog::set_pattern("[%X.%e] [%^%l%$] %v");
 
 	try {
-		return iptsd::debug::perf::main(gsl::span(argv, argc));
+		return iptsd::debug::perf::main(argv[1]);
 	} catch (std::exception &e) {
 		spdlog::error(e.what());
 		return EXIT_FAILURE;

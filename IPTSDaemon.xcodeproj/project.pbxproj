@@ -7,6 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		250BE67C29AC04AA00FDA782 /* reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FAA82996500F00BBAC23 /* reader.cpp */; };
+		250BE67D29AC04AA00FDA782 /* device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25E6114029967DEF005A9966 /* device.cpp */; };
+		250BE68029AC04AA00FDA782 /* detector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA6A2996500F00BBAC23 /* detector.cpp */; };
+		250BE68329AC04AA00FDA782 /* parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FAAA2996500F00BBAC23 /* parser.cpp */; };
+		250BE68429AC04AA00FDA782 /* finder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA6E2996500F00BBAC23 /* finder.cpp */; };
+		250BE68529AC04AA00FDA782 /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FAAE2996500F00BBAC23 /* config.cpp */; };
+		250BE68629AC04AA00FDA782 /* cluster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA6B2996500F00BBAC23 /* cluster.cpp */; };
+		250BE68829AC04AA00FDA782 /* detector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA552996500F00BBAC23 /* detector.cpp */; };
+		250BE68A29AC04AA00FDA782 /* libfmt.9.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 25E667D729A7CCBE000B9DC3 /* libfmt.9.1.0.dylib */; };
+		250BE68B29AC04AA00FDA782 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2520FAC82996510000BBAC23 /* IOKit.framework */; };
+		250BE68C29AC04AA00FDA782 /* libinih.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 25526E492996D1A300F61021 /* libinih.0.dylib */; };
+		250BE68F29AC04AA00FDA782 /* libfmt.9.1.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 25E667D729A7CCBE000B9DC3 /* libfmt.9.1.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		250BE69029AC04AA00FDA782 /* libinih.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 25526E492996D1A300F61021 /* libinih.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		250BE69529AC04D600FDA782 /* dump.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA852996500F00BBAC23 /* dump.cpp */; };
+		250BE69829AC0BDE00FDA782 /* reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FAA82996500F00BBAC23 /* reader.cpp */; };
+		250BE69929AC0BDE00FDA782 /* device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25E6114029967DEF005A9966 /* device.cpp */; };
+		250BE69A29AC0BDE00FDA782 /* detector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA6A2996500F00BBAC23 /* detector.cpp */; };
+		250BE69C29AC0BDE00FDA782 /* parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FAAA2996500F00BBAC23 /* parser.cpp */; };
+		250BE69D29AC0BDE00FDA782 /* finder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA6E2996500F00BBAC23 /* finder.cpp */; };
+		250BE69E29AC0BDE00FDA782 /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FAAE2996500F00BBAC23 /* config.cpp */; };
+		250BE69F29AC0BDE00FDA782 /* cluster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA6B2996500F00BBAC23 /* cluster.cpp */; };
+		250BE6A029AC0BDE00FDA782 /* detector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA552996500F00BBAC23 /* detector.cpp */; };
+		250BE6A229AC0BDE00FDA782 /* libfmt.9.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 25E667D729A7CCBE000B9DC3 /* libfmt.9.1.0.dylib */; };
+		250BE6A329AC0BDE00FDA782 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2520FAC82996510000BBAC23 /* IOKit.framework */; };
+		250BE6A429AC0BDE00FDA782 /* libinih.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 25526E492996D1A300F61021 /* libinih.0.dylib */; };
+		250BE6A729AC0BDE00FDA782 /* libfmt.9.1.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 25E667D729A7CCBE000B9DC3 /* libfmt.9.1.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		250BE6A829AC0BDE00FDA782 /* libinih.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 25526E492996D1A300F61021 /* libinih.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		250BE6AD29AC0C0400FDA782 /* perf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA812996500F00BBAC23 /* perf.cpp */; };
 		2520FAB02996500F00BBAC23 /* detector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA552996500F00BBAC23 /* detector.cpp */; };
 		2520FAB12996500F00BBAC23 /* detector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA6A2996500F00BBAC23 /* detector.cpp */; };
 		2520FAB22996500F00BBAC23 /* cluster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA6B2996500F00BBAC23 /* cluster.cpp */; };
@@ -28,6 +56,48 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		250BE68D29AC04AA00FDA782 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		250BE68E29AC04AA00FDA782 /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				250BE68F29AC04AA00FDA782 /* libfmt.9.1.0.dylib in Embed Libraries */,
+				250BE69029AC04AA00FDA782 /* libinih.0.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		250BE6A529AC0BDE00FDA782 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		250BE6A629AC0BDE00FDA782 /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				250BE6A729AC0BDE00FDA782 /* libfmt.9.1.0.dylib in Embed Libraries */,
+				250BE6A829AC0BDE00FDA782 /* libinih.0.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2520F9C229964EA300BBAC23 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 12;
@@ -52,6 +122,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		250BE69429AC04AA00FDA782 /* IPTSDump */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = IPTSDump; sourceTree = BUILT_PRODUCTS_DIR; };
+		250BE6AC29AC0BDE00FDA782 /* IPTSPerf */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = IPTSPerf; sourceTree = BUILT_PRODUCTS_DIR; };
 		2520F9C429964EA300BBAC23 /* IPTSDaemon */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = IPTSDaemon; sourceTree = BUILT_PRODUCTS_DIR; };
 		2520F9CE29964F6D00BBAC23 /* IPTSDaemon.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IPTSDaemon.entitlements; sourceTree = "<group>"; };
 		2520FA4D2996500F00BBAC23 /* visualization.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = visualization.cpp; sourceTree = "<group>"; };
@@ -126,6 +198,26 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		250BE68929AC04AA00FDA782 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				250BE68A29AC04AA00FDA782 /* libfmt.9.1.0.dylib in Frameworks */,
+				250BE68B29AC04AA00FDA782 /* IOKit.framework in Frameworks */,
+				250BE68C29AC04AA00FDA782 /* libinih.0.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		250BE6A129AC0BDE00FDA782 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				250BE6A229AC0BDE00FDA782 /* libfmt.9.1.0.dylib in Frameworks */,
+				250BE6A329AC0BDE00FDA782 /* IOKit.framework in Frameworks */,
+				250BE6A429AC0BDE00FDA782 /* libinih.0.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2520F9C129964EA300BBAC23 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -152,6 +244,8 @@
 			isa = PBXGroup;
 			children = (
 				2520F9C429964EA300BBAC23 /* IPTSDaemon */,
+				250BE69429AC04AA00FDA782 /* IPTSDump */,
+				250BE6AC29AC0BDE00FDA782 /* IPTSPerf */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -347,6 +441,42 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		250BE67A29AC04AA00FDA782 /* IPTSDump */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 250BE69129AC04AA00FDA782 /* Build configuration list for PBXNativeTarget "IPTSDump" */;
+			buildPhases = (
+				250BE67B29AC04AA00FDA782 /* Sources */,
+				250BE68929AC04AA00FDA782 /* Frameworks */,
+				250BE68D29AC04AA00FDA782 /* CopyFiles */,
+				250BE68E29AC04AA00FDA782 /* Embed Libraries */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IPTSDump;
+			productName = IPTSDaemon;
+			productReference = 250BE69429AC04AA00FDA782 /* IPTSDump */;
+			productType = "com.apple.product-type.tool";
+		};
+		250BE69629AC0BDE00FDA782 /* IPTSPerf */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 250BE6A929AC0BDE00FDA782 /* Build configuration list for PBXNativeTarget "IPTSPerf" */;
+			buildPhases = (
+				250BE69729AC0BDE00FDA782 /* Sources */,
+				250BE6A129AC0BDE00FDA782 /* Frameworks */,
+				250BE6A529AC0BDE00FDA782 /* CopyFiles */,
+				250BE6A629AC0BDE00FDA782 /* Embed Libraries */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IPTSPerf;
+			productName = IPTSDaemon;
+			productReference = 250BE6AC29AC0BDE00FDA782 /* IPTSPerf */;
+			productType = "com.apple.product-type.tool";
+		};
 		2520F9C329964EA300BBAC23 /* IPTSDaemon */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2520F9CB29964EA300BBAC23 /* Build configuration list for PBXNativeTarget "IPTSDaemon" */;
@@ -393,11 +523,45 @@
 			projectRoot = "";
 			targets = (
 				2520F9C329964EA300BBAC23 /* IPTSDaemon */,
+				250BE67A29AC04AA00FDA782 /* IPTSDump */,
+				250BE69629AC0BDE00FDA782 /* IPTSPerf */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		250BE67B29AC04AA00FDA782 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				250BE67C29AC04AA00FDA782 /* reader.cpp in Sources */,
+				250BE67D29AC04AA00FDA782 /* device.cpp in Sources */,
+				250BE68029AC04AA00FDA782 /* detector.cpp in Sources */,
+				250BE69529AC04D600FDA782 /* dump.cpp in Sources */,
+				250BE68329AC04AA00FDA782 /* parser.cpp in Sources */,
+				250BE68429AC04AA00FDA782 /* finder.cpp in Sources */,
+				250BE68529AC04AA00FDA782 /* config.cpp in Sources */,
+				250BE68629AC04AA00FDA782 /* cluster.cpp in Sources */,
+				250BE68829AC04AA00FDA782 /* detector.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		250BE69729AC0BDE00FDA782 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				250BE69829AC0BDE00FDA782 /* reader.cpp in Sources */,
+				250BE69929AC0BDE00FDA782 /* device.cpp in Sources */,
+				250BE6AD29AC0C0400FDA782 /* perf.cpp in Sources */,
+				250BE69A29AC0BDE00FDA782 /* detector.cpp in Sources */,
+				250BE69C29AC0BDE00FDA782 /* parser.cpp in Sources */,
+				250BE69D29AC0BDE00FDA782 /* finder.cpp in Sources */,
+				250BE69E29AC0BDE00FDA782 /* config.cpp in Sources */,
+				250BE69F29AC0BDE00FDA782 /* cluster.cpp in Sources */,
+				250BE6A029AC0BDE00FDA782 /* detector.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2520F9C029964EA300BBAC23 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -421,6 +585,78 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		250BE69229AC04AA00FDA782 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = IPTSDaemon/IPTSDaemon.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = K8RXBXZGN4;
+				ENABLE_HARDENED_RUNTIME = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/inih/56/lib,
+					/usr/local/Cellar/fmt/9.1.0/lib,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.xavier;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		250BE69329AC04AA00FDA782 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = IPTSDaemon/IPTSDaemon.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = K8RXBXZGN4;
+				ENABLE_HARDENED_RUNTIME = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/inih/56/lib,
+					/usr/local/Cellar/fmt/9.1.0/lib,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.xavier;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		250BE6AA29AC0BDE00FDA782 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = IPTSDaemon/IPTSDaemon.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = K8RXBXZGN4;
+				ENABLE_HARDENED_RUNTIME = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/inih/56/lib,
+					/usr/local/Cellar/fmt/9.1.0/lib,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.xavier;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		250BE6AB29AC0BDE00FDA782 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = IPTSDaemon/IPTSDaemon.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = K8RXBXZGN4;
+				ENABLE_HARDENED_RUNTIME = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/inih/56/lib,
+					/usr/local/Cellar/fmt/9.1.0/lib,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.xavier;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		2520F9C929964EA300BBAC23 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -553,7 +789,6 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/usr/local/Cellar/fmt/9.0.0/lib,
 					/usr/local/Cellar/inih/56/lib,
 					/usr/local/Cellar/fmt/9.1.0/lib,
 				);
@@ -572,7 +807,6 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					/usr/local/Cellar/fmt/9.0.0/lib,
 					/usr/local/Cellar/inih/56/lib,
 					/usr/local/Cellar/fmt/9.1.0/lib,
 				);
@@ -584,6 +818,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		250BE69129AC04AA00FDA782 /* Build configuration list for PBXNativeTarget "IPTSDump" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				250BE69229AC04AA00FDA782 /* Debug */,
+				250BE69329AC04AA00FDA782 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		250BE6A929AC0BDE00FDA782 /* Build configuration list for PBXNativeTarget "IPTSPerf" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				250BE6AA29AC0BDE00FDA782 /* Debug */,
+				250BE6AB29AC0BDE00FDA782 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2520F9BF29964EA300BBAC23 /* Build configuration list for PBXProject "IPTSDaemon" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
