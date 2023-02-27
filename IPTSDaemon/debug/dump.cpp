@@ -3,6 +3,7 @@
 #include <common/signal.hpp>
 #include <ipts/device.hpp>
 #include <ipts/protocol.hpp>
+#include "dump.hpp"
 
 #include <cstddef>
 #include <cstdint>
@@ -85,14 +86,9 @@ template <> struct fmt::formatter<gsl::span<const u8>> {
 
 namespace iptsd::debug::dump {
 
-struct iptsd_dump_header {
-	i16 vendor;
-	i16 product;
-};
-
 static int main(char *dump_file)
 {
-	std::filesystem::path filename(dump_file);
+    std::filesystem::path filename {dump_file};
 
 	std::atomic_bool should_exit = false;
 
@@ -105,11 +101,11 @@ static int main(char *dump_file)
 		file.open(filename, std::ios::out | std::ios::binary);
 	}
 
-    ipts::Device dev;
+    ipts::Device dev {};
 
     auto &meta = dev.meta_data;
 	if (file) {
-		struct iptsd_dump_header header {};
+		struct debug::iptsd_dump_header header {};
 		header.vendor = dev.vendor_id;
         header.product = dev.product_id;
 

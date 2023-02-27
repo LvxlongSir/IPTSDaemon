@@ -50,6 +50,42 @@
 		2520FAC92996510000BBAC23 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2520FAC82996510000BBAC23 /* IOKit.framework */; };
 		25526E4A2996D1A300F61021 /* libinih.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 25526E492996D1A300F61021 /* libinih.0.dylib */; };
 		25526E4B2996D1A300F61021 /* libinih.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 25526E492996D1A300F61021 /* libinih.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		25BAF9A729ACE8B600BBF0DE /* reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FAA82996500F00BBAC23 /* reader.cpp */; };
+		25BAF9A829ACE8B600BBF0DE /* device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25E6114029967DEF005A9966 /* device.cpp */; };
+		25BAF9AA29ACE8B600BBF0DE /* detector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA6A2996500F00BBAC23 /* detector.cpp */; };
+		25BAF9AB29ACE8B600BBF0DE /* parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FAAA2996500F00BBAC23 /* parser.cpp */; };
+		25BAF9AC29ACE8B600BBF0DE /* finder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA6E2996500F00BBAC23 /* finder.cpp */; };
+		25BAF9AD29ACE8B600BBF0DE /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FAAE2996500F00BBAC23 /* config.cpp */; };
+		25BAF9AE29ACE8B600BBF0DE /* cluster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA6B2996500F00BBAC23 /* cluster.cpp */; };
+		25BAF9AF29ACE8B600BBF0DE /* detector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA552996500F00BBAC23 /* detector.cpp */; };
+		25BAF9B129ACE8B600BBF0DE /* libfmt.9.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 25E667D729A7CCBE000B9DC3 /* libfmt.9.1.0.dylib */; };
+		25BAF9B229ACE8B600BBF0DE /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2520FAC82996510000BBAC23 /* IOKit.framework */; };
+		25BAF9B329ACE8B600BBF0DE /* libinih.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 25526E492996D1A300F61021 /* libinih.0.dylib */; };
+		25BAF9B629ACE8B600BBF0DE /* libfmt.9.1.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 25E667D729A7CCBE000B9DC3 /* libfmt.9.1.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		25BAF9B729ACE8B600BBF0DE /* libinih.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 25526E492996D1A300F61021 /* libinih.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		25BAF9BF29ACF08E00BBF0DE /* visualization.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA4D2996500F00BBAC23 /* visualization.cpp */; };
+		25BAF9C129ACF3C400BBF0DE /* libcairomm-1.16.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 25BAF9C029ACF3C400BBF0DE /* libcairomm-1.16.1.dylib */; };
+		25BAF9C229ACF3C400BBF0DE /* libcairomm-1.16.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 25BAF9C029ACF3C400BBF0DE /* libcairomm-1.16.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		25BAF9C529ACF48000BBF0DE /* reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FAA82996500F00BBAC23 /* reader.cpp */; };
+		25BAF9C629ACF48000BBF0DE /* device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25E6114029967DEF005A9966 /* device.cpp */; };
+		25BAF9C729ACF48000BBF0DE /* visualization.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA4D2996500F00BBAC23 /* visualization.cpp */; };
+		25BAF9C929ACF48000BBF0DE /* detector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA6A2996500F00BBAC23 /* detector.cpp */; };
+		25BAF9CA29ACF48000BBF0DE /* parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FAAA2996500F00BBAC23 /* parser.cpp */; };
+		25BAF9CB29ACF48000BBF0DE /* finder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA6E2996500F00BBAC23 /* finder.cpp */; };
+		25BAF9CC29ACF48000BBF0DE /* config.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FAAE2996500F00BBAC23 /* config.cpp */; };
+		25BAF9CD29ACF48000BBF0DE /* cluster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA6B2996500F00BBAC23 /* cluster.cpp */; };
+		25BAF9CE29ACF48000BBF0DE /* detector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA552996500F00BBAC23 /* detector.cpp */; };
+		25BAF9D029ACF48000BBF0DE /* libfmt.9.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 25E667D729A7CCBE000B9DC3 /* libfmt.9.1.0.dylib */; };
+		25BAF9D129ACF48000BBF0DE /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2520FAC82996510000BBAC23 /* IOKit.framework */; };
+		25BAF9D229ACF48000BBF0DE /* libcairomm-1.16.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 25BAF9C029ACF3C400BBF0DE /* libcairomm-1.16.1.dylib */; };
+		25BAF9D329ACF48000BBF0DE /* libinih.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 25526E492996D1A300F61021 /* libinih.0.dylib */; };
+		25BAF9D629ACF48000BBF0DE /* libcairomm-1.16.1.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 25BAF9C029ACF3C400BBF0DE /* libcairomm-1.16.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		25BAF9D729ACF48000BBF0DE /* libfmt.9.1.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 25E667D729A7CCBE000B9DC3 /* libfmt.9.1.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		25BAF9D829ACF48000BBF0DE /* libinih.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 25526E492996D1A300F61021 /* libinih.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		25BAF9DD29ACF49500BBF0DE /* show.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA832996500F00BBAC23 /* show.cpp */; };
+		25BAF9DE29ACF53E00BBF0DE /* plot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA802996500F00BBAC23 /* plot.cpp */; };
+		25BAF9E029ACF68300BBF0DE /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 25BAF9DF29ACF68300BBF0DE /* libSDL2-2.0.0.dylib */; };
+		25BAF9E129ACF68300BBF0DE /* libSDL2-2.0.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 25BAF9DF29ACF68300BBF0DE /* libSDL2-2.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		25E6114229967DEF005A9966 /* device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25E6114029967DEF005A9966 /* device.cpp */; };
 		25E667D829A7CCBE000B9DC3 /* libfmt.9.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 25E667D729A7CCBE000B9DC3 /* libfmt.9.1.0.dylib */; };
 		25E667D929A7CCBE000B9DC3 /* libfmt.9.1.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 25E667D729A7CCBE000B9DC3 /* libfmt.9.1.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -119,6 +155,51 @@
 			name = "Embed Libraries";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		25BAF9B429ACE8B600BBF0DE /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		25BAF9B529ACE8B600BBF0DE /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				25BAF9C229ACF3C400BBF0DE /* libcairomm-1.16.1.dylib in Embed Libraries */,
+				25BAF9B629ACE8B600BBF0DE /* libfmt.9.1.0.dylib in Embed Libraries */,
+				25BAF9B729ACE8B600BBF0DE /* libinih.0.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		25BAF9D429ACF48000BBF0DE /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		25BAF9D529ACF48000BBF0DE /* Embed Libraries */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				25BAF9E129ACF68300BBF0DE /* libSDL2-2.0.0.dylib in Embed Libraries */,
+				25BAF9D629ACF48000BBF0DE /* libcairomm-1.16.1.dylib in Embed Libraries */,
+				25BAF9D729ACF48000BBF0DE /* libfmt.9.1.0.dylib in Embed Libraries */,
+				25BAF9D829ACF48000BBF0DE /* libinih.0.dylib in Embed Libraries */,
+			);
+			name = "Embed Libraries";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -166,7 +247,6 @@
 		2520FA802996500F00BBAC23 /* plot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = plot.cpp; sourceTree = "<group>"; };
 		2520FA812996500F00BBAC23 /* perf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = perf.cpp; sourceTree = "<group>"; };
 		2520FA832996500F00BBAC23 /* show.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = show.cpp; sourceTree = "<group>"; };
-		2520FA842996500F00BBAC23 /* calibrate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = calibrate.cpp; sourceTree = "<group>"; };
 		2520FA852996500F00BBAC23 /* dump.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = dump.cpp; sourceTree = "<group>"; };
 		2520FA912996500F00BBAC23 /* ops.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ops.hpp; sourceTree = "<group>"; };
 		2520FA922996500F00BBAC23 /* image.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = image.hpp; sourceTree = "<group>"; };
@@ -191,6 +271,11 @@
 		2520FAAE2996500F00BBAC23 /* config.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = config.cpp; sourceTree = "<group>"; };
 		2520FAC82996510000BBAC23 /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		25526E492996D1A300F61021 /* libinih.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libinih.0.dylib; path = ../../../../usr/local/Cellar/inih/56/lib/libinih.0.dylib; sourceTree = "<group>"; };
+		25BAF9BB29ACE8B600BBF0DE /* IPTSPlot */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = IPTSPlot; sourceTree = BUILT_PRODUCTS_DIR; };
+		25BAF9BE29ACE98800BBF0DE /* dump.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = dump.hpp; sourceTree = "<group>"; };
+		25BAF9C029ACF3C400BBF0DE /* libcairomm-1.16.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libcairomm-1.16.1.dylib"; path = "../../../../usr/local/Cellar/cairomm/1.16.2/lib/libcairomm-1.16.1.dylib"; sourceTree = "<group>"; };
+		25BAF9DC29ACF48000BBF0DE /* IPTSShow */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = IPTSShow; sourceTree = BUILT_PRODUCTS_DIR; };
+		25BAF9DF29ACF68300BBF0DE /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2/2.26.3/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
 		25E6114029967DEF005A9966 /* device.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = device.cpp; sourceTree = "<group>"; };
 		25E6114129967DEF005A9966 /* device.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = device.hpp; sourceTree = "<group>"; };
 		25E6114329967E30005A9966 /* IPTSKenerlUserShared.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPTSKenerlUserShared.h; sourceTree = "<group>"; };
@@ -228,6 +313,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		25BAF9B029ACE8B600BBF0DE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25BAF9B129ACE8B600BBF0DE /* libfmt.9.1.0.dylib in Frameworks */,
+				25BAF9B229ACE8B600BBF0DE /* IOKit.framework in Frameworks */,
+				25BAF9C129ACF3C400BBF0DE /* libcairomm-1.16.1.dylib in Frameworks */,
+				25BAF9B329ACE8B600BBF0DE /* libinih.0.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		25BAF9CF29ACF48000BBF0DE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25BAF9D029ACF48000BBF0DE /* libfmt.9.1.0.dylib in Frameworks */,
+				25BAF9D129ACF48000BBF0DE /* IOKit.framework in Frameworks */,
+				25BAF9E029ACF68300BBF0DE /* libSDL2-2.0.0.dylib in Frameworks */,
+				25BAF9D229ACF48000BBF0DE /* libcairomm-1.16.1.dylib in Frameworks */,
+				25BAF9D329ACF48000BBF0DE /* libinih.0.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -246,6 +354,8 @@
 				2520F9C429964EA300BBAC23 /* IPTSDaemon */,
 				250BE69429AC04AA00FDA782 /* IPTSDump */,
 				250BE6AC29AC0BDE00FDA782 /* IPTSPerf */,
+				25BAF9BB29ACE8B600BBF0DE /* IPTSPlot */,
+				25BAF9DC29ACF48000BBF0DE /* IPTSShow */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -360,11 +470,11 @@
 		2520FA7F2996500F00BBAC23 /* debug */ = {
 			isa = PBXGroup;
 			children = (
-				2520FA802996500F00BBAC23 /* plot.cpp */,
-				2520FA812996500F00BBAC23 /* perf.cpp */,
-				2520FA832996500F00BBAC23 /* show.cpp */,
-				2520FA842996500F00BBAC23 /* calibrate.cpp */,
+				25BAF9BE29ACE98800BBF0DE /* dump.hpp */,
 				2520FA852996500F00BBAC23 /* dump.cpp */,
+				2520FA812996500F00BBAC23 /* perf.cpp */,
+				2520FA802996500F00BBAC23 /* plot.cpp */,
+				2520FA832996500F00BBAC23 /* show.cpp */,
 			);
 			path = debug;
 			sourceTree = "<group>";
@@ -431,6 +541,8 @@
 		2520FAC72996510000BBAC23 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				25BAF9DF29ACF68300BBF0DE /* libSDL2-2.0.0.dylib */,
+				25BAF9C029ACF3C400BBF0DE /* libcairomm-1.16.1.dylib */,
 				25E667D729A7CCBE000B9DC3 /* libfmt.9.1.0.dylib */,
 				25526E492996D1A300F61021 /* libinih.0.dylib */,
 				2520FAC82996510000BBAC23 /* IOKit.framework */,
@@ -495,6 +607,42 @@
 			productReference = 2520F9C429964EA300BBAC23 /* IPTSDaemon */;
 			productType = "com.apple.product-type.tool";
 		};
+		25BAF9A529ACE8B600BBF0DE /* IPTSPlot */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 25BAF9B829ACE8B600BBF0DE /* Build configuration list for PBXNativeTarget "IPTSPlot" */;
+			buildPhases = (
+				25BAF9A629ACE8B600BBF0DE /* Sources */,
+				25BAF9B029ACE8B600BBF0DE /* Frameworks */,
+				25BAF9B429ACE8B600BBF0DE /* CopyFiles */,
+				25BAF9B529ACE8B600BBF0DE /* Embed Libraries */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IPTSPlot;
+			productName = IPTSDaemon;
+			productReference = 25BAF9BB29ACE8B600BBF0DE /* IPTSPlot */;
+			productType = "com.apple.product-type.tool";
+		};
+		25BAF9C329ACF48000BBF0DE /* IPTSShow */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 25BAF9D929ACF48000BBF0DE /* Build configuration list for PBXNativeTarget "IPTSShow" */;
+			buildPhases = (
+				25BAF9C429ACF48000BBF0DE /* Sources */,
+				25BAF9CF29ACF48000BBF0DE /* Frameworks */,
+				25BAF9D429ACF48000BBF0DE /* CopyFiles */,
+				25BAF9D529ACF48000BBF0DE /* Embed Libraries */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IPTSShow;
+			productName = IPTSDaemon;
+			productReference = 25BAF9DC29ACF48000BBF0DE /* IPTSShow */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -525,6 +673,8 @@
 				2520F9C329964EA300BBAC23 /* IPTSDaemon */,
 				250BE67A29AC04AA00FDA782 /* IPTSDump */,
 				250BE69629AC0BDE00FDA782 /* IPTSPerf */,
+				25BAF9A529ACE8B600BBF0DE /* IPTSPlot */,
+				25BAF9C329ACF48000BBF0DE /* IPTSShow */,
 			);
 		};
 /* End PBXProject section */
@@ -579,6 +729,40 @@
 				2520FAB22996500F00BBAC23 /* cluster.cpp in Sources */,
 				2520FAB62996500F00BBAC23 /* cone.cpp in Sources */,
 				2520FAB02996500F00BBAC23 /* detector.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		25BAF9A629ACE8B600BBF0DE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25BAF9A729ACE8B600BBF0DE /* reader.cpp in Sources */,
+				25BAF9A829ACE8B600BBF0DE /* device.cpp in Sources */,
+				25BAF9BF29ACF08E00BBF0DE /* visualization.cpp in Sources */,
+				25BAF9AA29ACE8B600BBF0DE /* detector.cpp in Sources */,
+				25BAF9AB29ACE8B600BBF0DE /* parser.cpp in Sources */,
+				25BAF9AC29ACE8B600BBF0DE /* finder.cpp in Sources */,
+				25BAF9AD29ACE8B600BBF0DE /* config.cpp in Sources */,
+				25BAF9AE29ACE8B600BBF0DE /* cluster.cpp in Sources */,
+				25BAF9DE29ACF53E00BBF0DE /* plot.cpp in Sources */,
+				25BAF9AF29ACE8B600BBF0DE /* detector.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		25BAF9C429ACF48000BBF0DE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				25BAF9DD29ACF49500BBF0DE /* show.cpp in Sources */,
+				25BAF9C529ACF48000BBF0DE /* reader.cpp in Sources */,
+				25BAF9C629ACF48000BBF0DE /* device.cpp in Sources */,
+				25BAF9C729ACF48000BBF0DE /* visualization.cpp in Sources */,
+				25BAF9C929ACF48000BBF0DE /* detector.cpp in Sources */,
+				25BAF9CA29ACF48000BBF0DE /* parser.cpp in Sources */,
+				25BAF9CB29ACF48000BBF0DE /* finder.cpp in Sources */,
+				25BAF9CC29ACF48000BBF0DE /* config.cpp in Sources */,
+				25BAF9CD29ACF48000BBF0DE /* cluster.cpp in Sources */,
+				25BAF9CE29ACF48000BBF0DE /* detector.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -674,7 +858,7 @@
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
@@ -738,7 +922,7 @@
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
@@ -815,6 +999,84 @@
 			};
 			name = Release;
 		};
+		25BAF9B929ACE8B600BBF0DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = IPTSDaemon/IPTSDaemon.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = K8RXBXZGN4;
+				ENABLE_HARDENED_RUNTIME = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/inih/56/lib,
+					/usr/local/Cellar/fmt/9.1.0/lib,
+					/usr/local/Cellar/cairomm/1.16.2/lib,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.xavier;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		25BAF9BA29ACE8B600BBF0DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = IPTSDaemon/IPTSDaemon.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = K8RXBXZGN4;
+				ENABLE_HARDENED_RUNTIME = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/inih/56/lib,
+					/usr/local/Cellar/fmt/9.1.0/lib,
+					/usr/local/Cellar/cairomm/1.16.2/lib,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.xavier;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		25BAF9DA29ACF48000BBF0DE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = IPTSDaemon/IPTSDaemon.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = K8RXBXZGN4;
+				ENABLE_HARDENED_RUNTIME = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/inih/56/lib,
+					/usr/local/Cellar/fmt/9.1.0/lib,
+					/usr/local/Cellar/cairomm/1.16.2/lib,
+					/usr/local/Cellar/sdl2/2.26.3/lib,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.xavier;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		25BAF9DB29ACF48000BBF0DE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = IPTSDaemon/IPTSDaemon.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = K8RXBXZGN4;
+				ENABLE_HARDENED_RUNTIME = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/inih/56/lib,
+					/usr/local/Cellar/fmt/9.1.0/lib,
+					/usr/local/Cellar/cairomm/1.16.2/lib,
+					/usr/local/Cellar/sdl2/2.26.3/lib,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.xavier;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -850,6 +1112,24 @@
 			buildConfigurations = (
 				2520F9CC29964EA300BBAC23 /* Debug */,
 				2520F9CD29964EA300BBAC23 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		25BAF9B829ACE8B600BBF0DE /* Build configuration list for PBXNativeTarget "IPTSPlot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				25BAF9B929ACE8B600BBF0DE /* Debug */,
+				25BAF9BA29ACE8B600BBF0DE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		25BAF9D929ACF48000BBF0DE /* Build configuration list for PBXNativeTarget "IPTSShow" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				25BAF9DA29ACF48000BBF0DE /* Debug */,
+				25BAF9DB29ACF48000BBF0DE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

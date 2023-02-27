@@ -7,7 +7,6 @@
 #include <ipts/device.hpp>
 #include <ipts/parser.hpp>
 
-#include <CLI/CLI.hpp>
 #include <SDL2/SDL.h>
 #include <cairomm/cairomm.h>
 #include <filesystem>
@@ -43,34 +42,25 @@ static void iptsd_show_handle_input(const Cairo::RefPtr<Cairo::Context> &cairo, 
 	vis.draw_contacts(cairo, rsize, contacts);
 }
 
-static int main(gsl::span<char *> args)
+static int main()
 {
-	CLI::App app {};
-	std::filesystem::path path;
+    ipts::Device device {};
 
-	app.add_option("DEVICE", path, "The hidraw device to read from.")
-		->type_name("FILE")
-		->required();
-
-	CLI11_PARSE(app, args.size(), args.data());
-
-	ipts::Device device {path};
-
-	auto meta = device.get_metadata();
+    auto meta = device.meta_data;
 	if (meta.has_value()) {
 		auto &t = meta->transform;
-		auto &u = meta->unknown.unknown;
+		auto &u = meta->unknown2;
 
 		spdlog::info("Metadata:");
 		spdlog::info("rows={}, columns={}", meta->size.rows, meta->size.columns);
 		spdlog::info("width={}, height={}", meta->size.width, meta->size.height);
 		spdlog::info("transform=[{},{},{},{},{},{}]", t.xx, t.yx, t.tx, t.xy, t.yy, t.ty);
 		spdlog::info("unknown={}, [{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}]",
-			     meta->unknown_byte, u[0], u[1], u[2], u[3], u[4], u[5], u[6], u[7],
+			     meta->unknown1, u[0], u[1], u[2], u[3], u[4], u[5], u[6], u[7],
 			     u[8], u[9], u[10], u[11], u[12], u[13], u[14], u[15]);
 	}
 
-	config::Config config {device.vendor(), device.product(), meta};
+	config::Config config {device.vendor_id, device.product_id, meta};
 
 	// Check if a config was found
 	if (config.width == 0 || config.height == 0)
@@ -78,10 +68,6 @@ static int main(gsl::span<char *> args)
 
 	gfx::Visualization vis {config};
 	contacts::ContactFinder finder {config.contacts()};
-
-	// Get the buffer size from the HID descriptor
-	std::size_t buffer_size = device.buffer_size();
-	std::vector<u8> buffer(buffer_size);
 
 	SDL_Init(SDL_INIT_VIDEO);
 
@@ -100,7 +86,7 @@ static int main(gsl::span<char *> args)
 						   SDL_TEXTUREACCESS_STREAMING, rsize.x, rsize.y);
 
 	// Create a texture for drawing
-	auto drawtex = Cairo::ImageSurface::create(Cairo::FORMAT_ARGB32, rsize.x, rsize.y);
+	auto drawtex = Cairo::ImageSurface::create(Cairo::ImageSurface::Format::ARGB32, rsize.x, rsize.y);
 	auto cairo = Cairo::Context::create(drawtex);
 
 	ipts::Parser parser {};
@@ -111,10 +97,6 @@ static int main(gsl::span<char *> args)
 	// Count errors, if we receive 50 continuous errors, chances are pretty good that
 	// something is broken beyond repair and the program should exit.
 	i32 errors = 0;
-
-	// Enable multitouch mode
-	device.set_mode(true);
-
 	while (true) {
 		if (errors >= 50) {
 			spdlog::error("Encountered 50 continuous errors, aborting...");
@@ -134,13 +116,11 @@ static int main(gsl::span<char *> args)
 			break;
 
 		try {
-			ssize_t size = device.read(buffer);
-
-			// Does this report contain touch data?
-			if (!device.is_touch_data(buffer[0]))
-				continue;
-
-			parser.parse(gsl::span<u8>(buffer.data(), size));
+            gsl::span<u8> buffer = device.read();
+            
+            device.process_begin();
+			parser.parse(buffer);
+            device.process_end();
 
 			void *pixels = nullptr;
 			int pitch = 0;
@@ -164,9 +144,6 @@ static int main(gsl::span<char *> args)
 		errors = 0;
 	}
 
-	// Disable multitouch mode
-	device.set_mode(false);
-
 	SDL_DestroyTexture(rendertex);
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
@@ -182,7 +159,7 @@ int main(int argc, char *argv[])
 	spdlog::set_pattern("[%X.%e] [%^%l%$] %v");
 
 	try {
-		return iptsd::debug::show::main(gsl::span(argv, argc));
+		return iptsd::debug::show::main();
 	} catch (std::exception &e) {
 		spdlog::error(e.what());
 		return EXIT_FAILURE;

@@ -21,7 +21,7 @@ namespace iptsd::gfx {
 
 Cairo::RefPtr<Cairo::ImageSurface> image_surface_create(container::Image<Argb> &image)
 {
-	auto const format = Cairo::FORMAT_ARGB32;
+	auto const format = Cairo::ImageSurface::Format::ARGB32;
 	auto const size = image.size();
 
 	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
@@ -66,7 +66,7 @@ void Visualization::draw_heatmap(const Cairo::RefPtr<Cairo::Context> &cairo, ind
 	// Upscale surface to window dimensions
 	Cairo::RefPtr<Cairo::SurfacePattern> pattern = Cairo::SurfacePattern::create(source);
 	pattern->set_matrix(matrix);
-	pattern->set_filter(Cairo::FILTER_NEAREST);
+	pattern->set_filter(Cairo::SurfacePattern::Filter::NEAREST);
 
 	// Copy source into output
 	cairo->set_source(pattern);
@@ -80,7 +80,7 @@ void Visualization::draw_contacts(const Cairo::RefPtr<Cairo::Context> &cairo, in
 	f64 diag = std::hypot(window.x, window.y);
 
 	// Select Font
-	cairo->select_font_face("monospace", Cairo::FONT_SLANT_NORMAL, Cairo::FONT_WEIGHT_NORMAL);
+	cairo->select_font_face("monospace", Cairo::ToyFontFace::Slant::NORMAL, Cairo::ToyFontFace::Weight::NORMAL);
 	cairo->set_font_size(24.0);
 
 	for (const auto &contact : contacts) {
@@ -90,7 +90,7 @@ void Visualization::draw_contacts(const Cairo::RefPtr<Cairo::Context> &cairo, in
 		// Color invalid contacts red, instable contacts yellow, and stable contacts green
 		if (!contact.valid)
 			cairo->set_source_rgb(1, 0, 0);
-		else if (!contact.stable)
+		else if (contact.instability)
 			cairo->set_source_rgb(1, 1, 0);
 		else
 			cairo->set_source_rgb(0, 1, 0);

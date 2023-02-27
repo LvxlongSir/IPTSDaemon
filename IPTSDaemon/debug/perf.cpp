@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
-#include "container/ops.hpp"
-
 #include <common/types.hpp>
 #include <config/config.hpp>
 #include <contacts/finder.hpp>
 #include <container/image.hpp>
+#include <container/ops.hpp>
 #include <ipts/parser.hpp>
+#include "dump.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -23,11 +23,6 @@
 #include <vector>
 
 namespace iptsd::debug::perf {
-
-struct iptsd_dump_header {
-	i16 vendor;
-	i16 product;
-};
 
 static void iptsd_perf_handle_input(contacts::ContactFinder &finder, const ipts::Heatmap &data)
 {
@@ -48,13 +43,13 @@ static void iptsd_perf_handle_input(contacts::ContactFinder &finder, const ipts:
 
 static int main(char *dump_file)
 {
-	std::filesystem::path path(dump_file);
+    std::filesystem::path path {dump_file};
 	u32 runs = 10;
 
 	std::ifstream ifs {};
 	ifs.open(path, std::ios::in | std::ios::binary);
 
-	struct iptsd_dump_header header {};
+	struct debug::iptsd_dump_header header {};
 	ifs.read(reinterpret_cast<char *>(&header), sizeof(header));
 
 	char has_meta = 0;

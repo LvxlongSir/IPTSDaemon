@@ -5,8 +5,8 @@
 #include <container/image.hpp>
 #include <gfx/visualization.hpp>
 #include <ipts/parser.hpp>
+#include "dump.hpp"
 
-#include <CLI/CLI.hpp>
 #include <algorithm>
 #include <cairomm/cairomm.h>
 #include <exception>
@@ -21,12 +21,6 @@
 #include <vector>
 
 namespace iptsd::debug::plot {
-
-struct iptsd_dump_header {
-	i16 vendor;
-	i16 product;
-	std::size_t buffer_size;
-};
 
 static void iptsd_plot_handle_input(const Cairo::RefPtr<Cairo::Context> &cairo, index2_t rsize,
 				    gfx::Visualization &vis, contacts::ContactFinder &finder,
@@ -53,26 +47,15 @@ static void iptsd_plot_handle_input(const Cairo::RefPtr<Cairo::Context> &cairo, 
 	vis.draw_contacts(cairo, rsize, contacts);
 }
 
-static int main(gsl::span<char *> args)
+static int main(char *dump_file, char *plot_dir)
 {
-	CLI::App app {};
-	std::filesystem::path path;
-	std::filesystem::path output;
-
-	app.add_option("DATA", path, "The binary data file containing the data to plot.")
-		->type_name("FILE")
-		->required();
-
-	app.add_option("OUTPUT", output, "The output directory containg plotted frames.")
-		->type_name("DIR")
-		->required();
-
-	CLI11_PARSE(app, args.size(), args.data());
+    std::filesystem::path path {dump_file};
+    std::filesystem::path output {plot_dir};
 
 	std::ifstream ifs {};
 	ifs.open(path, std::ios::in | std::ios::binary);
 
-	struct iptsd_dump_header header {};
+	struct debug::iptsd_dump_header header {};
 
 	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
 	ifs.read(reinterpret_cast<char *>(&header), sizeof(header));
@@ -81,9 +64,9 @@ static int main(gsl::span<char *> args)
 	ifs.read(&has_meta, sizeof(has_meta));
 
 	// Read metadata
-	std::optional<ipts::Metadata> meta = std::nullopt;
+	std::optional<IPTSDeviceMetaData> meta = std::nullopt;
 	if (has_meta) {
-		ipts::Metadata m {};
+        IPTSDeviceMetaData m {};
 
 		// NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
 		ifs.read(reinterpret_cast<char *>(&m), sizeof(m));
@@ -93,19 +76,18 @@ static int main(gsl::span<char *> args)
 
 	spdlog::info("Vendor:       {:04X}", header.vendor);
 	spdlog::info("Product:      {:04X}", header.product);
-	spdlog::info("Buffer Size:  {}", header.buffer_size);
 
 	if (meta.has_value()) {
 		const auto &m = meta;
 		auto &t = m->transform;
-		auto &u = m->unknown.unknown;
+		auto &u = m->unknown2;
 
 		spdlog::info("Metadata:");
 		spdlog::info("rows={}, columns={}", m->size.rows, m->size.columns);
 		spdlog::info("width={}, height={}", m->size.width, m->size.height);
 		spdlog::info("transform=[{},{},{},{},{},{}]", t.xx, t.yx, t.tx, t.xy, t.yy, t.ty);
 		spdlog::info("unknown={}, [{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}]",
-			     m->unknown_byte, u[0], u[1], u[2], u[3], u[4], u[5], u[6], u[7], u[8],
+			     m->unknown1, u[0], u[1], u[2], u[3], u[4], u[5], u[6], u[7], u[8],
 			     u[9], u[10], u[11], u[12], u[13], u[14], u[15]);
 	}
 
@@ -126,7 +108,7 @@ static int main(gsl::span<char *> args)
 	rsize.x = gsl::narrow<int>(std::round(aspect * rsize.y));
 
 	// Create a texture for drawing
-	auto drawtex = Cairo::ImageSurface::create(Cairo::FORMAT_ARGB32, rsize.x, rsize.y);
+	auto drawtex = Cairo::ImageSurface::create(Cairo::ImageSurface::Format::ARGB32, rsize.x, rsize.y);
 	auto cairo = Cairo::Context::create(drawtex);
 
 	ipts::Parser parser {};
@@ -134,22 +116,19 @@ static int main(gsl::span<char *> args)
 		iptsd_plot_handle_input(cairo, rsize, vis, finder, data);
 	};
 
-	std::vector<u8> buffer(header.buffer_size);
 	std::filesystem::create_directories(output);
 
 	u32 i = 0;
 	while (ifs.peek() != EOF) {
 		try {
 			ssize_t size = 0;
-
-			// NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
 			ifs.read(reinterpret_cast<char *>(&size), sizeof(size));
+            
+            std::vector<u8> buffer(size);
+			ifs.read(reinterpret_cast<char *>(buffer.data()), gsl::narrow<std::streamsize>(size));
 
-			// NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
-			ifs.read(reinterpret_cast<char *>(buffer.data()),
-				 gsl::narrow<std::streamsize>(buffer.size()));
-
-			parser.parse(gsl::span<u8>(buffer.data(), size));
+            auto buf = gsl::span<u8>(buffer.data(), size);
+			parser.parse(buf);
 
 			// Save the texture to a png file
 			drawtex->write_to_png(output / fmt::format("{:05}.png", i++));
@@ -166,10 +145,13 @@ static int main(gsl::span<char *> args)
 
 int main(int argc, char *argv[])
 {
+    if (argc != 3)
+        return -1;
+    
 	spdlog::set_pattern("[%X.%e] [%^%l%$] %v");
 
 	try {
-		return iptsd::debug::plot::main(gsl::span(argv, argc));
+		return iptsd::debug::plot::main(argv[1], argv[2]);
 	} catch (std::exception &e) {
 		spdlog::error(e.what());
 		return EXIT_FAILURE;
