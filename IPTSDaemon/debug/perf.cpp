@@ -30,9 +30,9 @@ static void iptsd_perf_handle_input(contacts::ContactFinder &finder, const ipts:
 	finder.resize(index2_t {data.dim.width, data.dim.height});
 
 	// Normalize and invert the heatmap data.
-	std::transform(data.data.begin(), data.data.end(), finder.data().begin(), [&](auto v) {
-		f32 val = static_cast<f32>(v - data.dim.z_min) /
-			  static_cast<f32>(data.dim.z_max - data.dim.z_min);
+	std::transform(data.data.begin(), data.data.end(), finder.data().begin(), [&](f32 v) {
+		const f32 val = (v - static_cast<f32>(data.dim.z_min)) /
+				static_cast<f32>(data.dim.z_max - data.dim.z_min);
 
 		return 1.0f - val;
 	});
@@ -67,20 +67,19 @@ static int main(char *dump_file)
 	spdlog::info("Product:      {:04X}", header.product);
 
 	if (meta.has_value()) {
-		const auto &m = meta;
-		auto &t = m->transform;
-		auto &u = m->unknown2;
+		auto &t = meta->transform;
+		auto &u = meta->unknown2;
 
 		spdlog::info("Metadata:");
-		spdlog::info("rows={}, columns={}", m->size.rows, m->size.columns);
-		spdlog::info("width={}, height={}", m->size.width, m->size.height);
+		spdlog::info("rows={}, columns={}", meta->size.rows, meta->size.columns);
+		spdlog::info("width={}, height={}", meta->size.width, meta->size.height);
 		spdlog::info("transform=[{},{},{},{},{},{}]", t.xx, t.yx, t.tx, t.xy, t.yy, t.ty);
 		spdlog::info("unknown={}, [{},{},{},{},{},{},{},{},{},{},{},{},{},{},{},{}]",
-			     m->unknown1, u[0], u[1], u[2], u[3], u[4], u[5], u[6], u[7], u[8],
+                 meta->unknown1, u[0], u[1], u[2], u[3], u[4], u[5], u[6], u[7], u[8],
 			     u[9], u[10], u[11], u[12], u[13], u[14], u[15]);
 	}
 
-	config::Config config {header.vendor, header.product, meta};
+	const config::Config config {header.vendor, header.product, meta};
 
 	// Check if a config was found
 	if (config.width == 0 || config.height == 0)
@@ -100,15 +99,15 @@ static int main(char *dump_file)
 	u64 total_of_squares = 0;
 	u32 count = 0;
 
-	auto min = clock::duration::max();
-	auto max = clock::duration::min();
+	clock::duration min = clock::duration::max();
+	clock::duration max = clock::duration::min();
 	bool had_heatmap = false;
 	bool reader_finished_successfully = false;
 
 	// Parser is idempotent but ContactFinder is not
 	contacts::ContactFinder finder {config.contacts()};
 	ipts::Parser parser {};
-	parser.on_heatmap = [&](const auto &data) {
+	parser.on_heatmap = [&](const ipts::Heatmap &data) {
 		iptsd_perf_handle_input(finder, data);
 		// Don't track time for non-heatmap
 		had_heatmap = true;
@@ -128,6 +127,7 @@ static int main(char *dump_file)
 				size_t size = 0;
 				if (reader.size() < sizeof(size))
 					break;
+
 				std::memcpy(&size, reader.data(), sizeof(size));
 				reader = reader.subspan(sizeof(size));
 
@@ -137,7 +137,7 @@ static int main(char *dump_file)
 				reader = reader.subspan(size);
 
 				// Take start time
-				auto start = clock::now();
+				const clock::time_point start = clock::now();
 
 				// Send the report to the finder through the parser for processing
 				// Cannot put this in a loop because it is not a pure function
@@ -146,15 +146,18 @@ static int main(char *dump_file)
 
 				if (std::exchange(had_heatmap, false)) {
 					// Take end time
-					auto end = clock::now();
+					const clock::time_point end = clock::now();
+					const clock::duration x_ns = end - start;
 
-					clock::duration x_ns = end - start;
 					// Divide early for x and x**2 because they are overflowing
-					u64 x_us = duration_cast<micros_u64>(x_ns).count();
+					const u64 x_us = duration_cast<micros_u64>(x_ns).count();
+
 					total += x_us;
 					total_of_squares += x_us * x_us;
+
 					min = std::min(min, x_ns);
 					max = std::max(max, x_ns);
+
 					++count;
 				}
 			} catch (std::exception &e) {
@@ -168,9 +171,9 @@ static int main(char *dump_file)
 	if (!reader_finished_successfully)
 		spdlog::warn("Leftover data at end of input");
 
-	f64 n = gsl::narrow<f64>(count);
-	f64 mean = gsl::narrow<f64>(total) / n;
-	f64 stddev = std::sqrt(gsl::narrow<f64>(total_of_squares) / n - mean * mean);
+	const f64 n = gsl::narrow<f64>(count);
+	const f64 mean = gsl::narrow<f64>(total) / n;
+	const f64 stddev = std::sqrt(gsl::narrow<f64>(total_of_squares) / n - mean * mean);
 
 	spdlog::info("Ran {} times", count);
 	spdlog::info("Total: {}μs", total);

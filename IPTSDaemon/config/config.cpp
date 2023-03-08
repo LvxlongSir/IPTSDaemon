@@ -13,6 +13,8 @@
 #include <ini.h>
 #include <string>
 
+namespace filesystem = std::filesystem;
+
 namespace iptsd::config {
 
 struct iptsd_config_device {
@@ -31,9 +33,9 @@ static int parse_dev(void *user, const char *c_section, const char *c_name, cons
 	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
 	auto *dev = reinterpret_cast<struct iptsd_config_device *>(user);
 
-	std::string section(c_section);
-	std::string name(c_name);
-	std::string value(c_value);
+	const std::string section(c_section);
+	const std::string name(c_name);
+	const std::string value(c_value);
 
 	if (section != "Device")
 		return 1;
@@ -52,8 +54,8 @@ static int parse_conf(void *user, const char *c_section, const char *c_name, con
 	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
 	auto *config = reinterpret_cast<Config *>(user);
 
-	std::string section(c_section);
-	std::string name(c_name);
+	const std::string section(c_section);
+	const std::string name(c_name);
 	std::string value(c_value);
 
 	if (section == "Config" && name == "InvertX")
@@ -167,10 +169,10 @@ static int parse_conf(void *user, const char *c_section, const char *c_name, con
 
 void Config::load_dir(const std::string &name, bool check_device)
 {
-	if (!std::filesystem::exists(name))
+	if (!filesystem::exists(name))
 		return;
 
-	for (auto &p : std::filesystem::directory_iterator(name)) {
+	for (const filesystem::directory_entry &p : filesystem::directory_iterator(name)) {
 		if (!p.is_regular_file())
 			continue;
 

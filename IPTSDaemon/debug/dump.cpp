@@ -57,25 +57,25 @@ template <> struct fmt::formatter<gsl::span<const u8>> {
 			size_t j = 0;
 
 			if (prefix != 'n')
-				it = format_to(it, pfxstr, i);
+				it = format_to(it, fmt::runtime(pfxstr), i);
 
 			for (; j < 8 && i + j < buf.size(); j++)
-				it = format_to(it, fmtstr, buf[i + j]);
+				it = format_to(it, fmt::runtime(fmtstr), buf[i + j]);
 
 			it = format_to(it, " ");
 
 			for (; j < 16 && i + j < buf.size(); j++)
-				it = format_to(it, fmtstr, buf[i + j]);
+				it = format_to(it, fmt::runtime(fmtstr), buf[i + j]);
 
 			it = format_to(it, " ");
 
 			for (; j < 24 && i + j < buf.size(); j++)
-				it = format_to(it, fmtstr, buf[i + j]);
+				it = format_to(it, fmt::runtime(fmtstr), buf[i + j]);
 
 			it = format_to(it, " ");
 
 			for (; j < 32 && i + j < buf.size(); j++)
-				it = format_to(it, fmtstr, buf[i + j]);
+				it = format_to(it, fmt::runtime(fmtstr), buf[i + j]);
 
 			it = format_to(it, "\n");
 		}
@@ -103,7 +103,7 @@ static int main(char *dump_file)
 
     ipts::Device dev {};
 
-    auto &meta = dev.meta_data;
+    std::optional<IPTSDeviceMetaData> &meta = dev.meta_data;
 	if (file) {
 		struct debug::iptsd_dump_header header {};
 		header.vendor = dev.vendor_id;
@@ -123,8 +123,8 @@ static int main(char *dump_file)
 	spdlog::info("Product:      {:04X}", dev.product_id);
 
 	if (meta.has_value()) {
-		auto &t = meta->transform;
-		auto &u = meta->unknown2;
+		const auto &t = meta->transform;
+		const auto &u = meta->unknown2;
 
 		spdlog::info("Metadata:");
 		spdlog::info("rows={}, columns={}", meta->size.rows, meta->size.columns);
@@ -146,12 +146,12 @@ static int main(char *dump_file)
 
 		try {
             gsl::span<u8> buffer = dev.read();
-            auto size = buffer.size();
+            const ssize_t size = buffer.size();
             
             dev.process_begin();
 
 			if (file) {
-				file.write(reinterpret_cast<char *>(&size), sizeof(size));
+				file.write(reinterpret_cast<const char *>(&size), sizeof(size));
 				file.write(reinterpret_cast<char *>(buffer.data()), gsl::narrow<std::streamsize>(size));
 			}
             

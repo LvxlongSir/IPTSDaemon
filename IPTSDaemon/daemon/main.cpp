@@ -21,6 +21,7 @@
 #include <filesystem>
 #include <functional>
 #include <iostream>
+#include <optional>
 #include <spdlog/spdlog.h>
 #include <stdexcept>
 #include <thread>
@@ -38,7 +39,7 @@ static int start()
 
 	ipts::Device device;
 
-	auto &meta = device.meta_data;
+    std::optional<IPTSDeviceMetaData> &meta = device.meta_data;
 	if (meta.has_value()) {
 		auto &t = meta->transform;
 		auto &u = meta->unknown2;
@@ -63,12 +64,12 @@ static int start()
 
 	ipts::Parser parser {};
     if (!config.stylus_disable) {
-        parser.on_dft = [&](const auto &dft, auto &stylus) {
+        parser.on_dft = [&](const ipts::DftWindow &dft, ipts::StylusData &stylus) {
             device.process_end();
             
             iptsd_dft_input(ctx, dft, stylus);
         };
-        parser.on_stylus = [&](const auto &data) {
+        parser.on_stylus = [&](const ipts::StylusData &data) {
             device.process_end();
             
             IPTSHIDReport report;
@@ -80,7 +81,7 @@ static int start()
         spdlog::warn("Stylus is disabled!");
     
     if (!config.touch_disable)
-        parser.on_heatmap = [&](const auto &data) {
+        parser.on_heatmap = [&](const ipts::Heatmap &data) {
             device.process_end();
             
             if (ctx.devices.stylus->active && ctx.config.touch_disable_on_stylus)

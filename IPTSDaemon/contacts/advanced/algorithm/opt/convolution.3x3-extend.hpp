@@ -2,9 +2,23 @@
  * Optimized version of convolution.hpp. Do not include directly.
  */
 
-#include "../convolution.hpp"
+#pragma once
+
+#include <common/types.hpp>
+
+#include "../border.hpp"
+
+#include <container/image.hpp>
+#include <container/kernel.hpp>
+#include <container/ops.hpp>
+
+#include <math/num.hpp>
+#include <math/vec2.hpp>
 
 #include <common/access.hpp>
+
+using namespace iptsd::container;
+using namespace iptsd::math;
 
 namespace iptsd::contacts::advanced::alg::conv::impl {
 
@@ -33,9 +47,9 @@ void conv_3x3_extend(Image<T>& out, Image<T> const& data, Kernel<S, 3, 3> const&
         {
             T v = math::num<T>::zero;
 
-            v += d(i,  0, -1) * k(-1,  0);      // extended
-            v += d(i,  0, -1) * k( 0,  0);      // extended
-            v += d(i,  1, -1) * k( 1,  0);      // extended
+            v += d(i,  0,  0) * k(-1, -1);      // extended
+            v += d(i,  0,  0) * k( 0, -1);      // extended
+            v += d(i,  1,  0) * k( 1, -1);      // extended
 
             v += d(i,  0,  0) * k(-1,  0);      // extended
             v += d(i,  0,  0) * k( 0,  0);
@@ -53,9 +67,9 @@ void conv_3x3_extend(Image<T>& out, Image<T> const& data, Kernel<S, 3, 3> const&
         while (i < limit) {
             T v = math::num<T>::zero;
 
-            v += d(i, -1, -1) * k(-1,  0);      // extended
-            v += d(i,  0, -1) * k( 0,  0);      // extended
-            v += d(i,  1, -1) * k( 1,  0);      // extended
+            v += d(i, -1,  0) * k(-1, -1);      // extended
+            v += d(i,  0,  0) * k( 0, -1);      // extended
+            v += d(i,  1,  0) * k( 1, -1);      // extended
 
             v += d(i, -1,  0) * k(-1,  0);
             v += d(i,  0,  0) * k( 0,  0);
@@ -72,9 +86,9 @@ void conv_3x3_extend(Image<T>& out, Image<T> const& data, Kernel<S, 3, 3> const&
         {
             T v = math::num<T>::zero;
 
-            v += d(i, -1, -1) * k(-1,  0);      // extended
-            v += d(i,  0, -1) * k( 0,  0);      // extended
-            v += d(i,  0, -1) * k( 1,  0);      // extended
+            v += d(i, -1,  0) * k(-1, -1);      // extended
+            v += d(i,  0,  0) * k( 0, -1);      // extended
+            v += d(i,  0,  0) * k( 1, -1);      // extended
 
             v += d(i, -1,  0) * k(-1,  0);
             v += d(i,  0,  0) * k( 0,  0);

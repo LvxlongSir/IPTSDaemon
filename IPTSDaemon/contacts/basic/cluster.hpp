@@ -8,6 +8,8 @@
 #include <math/mat2.hpp>
 #include <math/vec2.hpp>
 
+#include <vector>
+
 namespace iptsd::contacts::basic {
 
 class Cluster {
@@ -19,15 +21,17 @@ public:
 	f64 xy = 0;
 	f64 w = 0;
 
-public:
-	Cluster(container::Image<f32> &heatmap, container::Image<bool> &visited, index2_t center);
-
-	math::Vec2<f64> mean();
-	math::Mat2s<f64> cov();
-
 private:
-	void add(index2_t pos, f64 val);
-	void check(container::Image<f32> &heatmap, container::Image<bool> &visited, index2_t pos);
+	container::Image<bool> visited;
+
+public:
+	Cluster(index2_t size);
+
+	[[nodiscard]] math::Vec2<f64> mean() const;
+	[[nodiscard]] math::Mat2s<f64> cov() const;
+
+	void add(index2_t position, f64 value);
+	bool contains(index2_t position);
 };
 
 } /* namespace iptsd::contacts::basic */

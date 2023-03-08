@@ -22,7 +22,6 @@
 		250BE69029AC04AA00FDA782 /* libinih.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 25526E492996D1A300F61021 /* libinih.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		250BE69529AC04D600FDA782 /* dump.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA852996500F00BBAC23 /* dump.cpp */; };
 		250BE69829AC0BDE00FDA782 /* reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FAA82996500F00BBAC23 /* reader.cpp */; };
-		250BE69929AC0BDE00FDA782 /* device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25E6114029967DEF005A9966 /* device.cpp */; };
 		250BE69A29AC0BDE00FDA782 /* detector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA6A2996500F00BBAC23 /* detector.cpp */; };
 		250BE69C29AC0BDE00FDA782 /* parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FAAA2996500F00BBAC23 /* parser.cpp */; };
 		250BE69D29AC0BDE00FDA782 /* finder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA6E2996500F00BBAC23 /* finder.cpp */; };
@@ -50,7 +49,6 @@
 		25526E4A2996D1A300F61021 /* libinih.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 25526E492996D1A300F61021 /* libinih.0.dylib */; };
 		25526E4B2996D1A300F61021 /* libinih.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 25526E492996D1A300F61021 /* libinih.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		25BAF9A729ACE8B600BBF0DE /* reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FAA82996500F00BBAC23 /* reader.cpp */; };
-		25BAF9A829ACE8B600BBF0DE /* device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25E6114029967DEF005A9966 /* device.cpp */; };
 		25BAF9AA29ACE8B600BBF0DE /* detector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA6A2996500F00BBAC23 /* detector.cpp */; };
 		25BAF9AB29ACE8B600BBF0DE /* parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FAAA2996500F00BBAC23 /* parser.cpp */; };
 		25BAF9AC29ACE8B600BBF0DE /* finder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA6E2996500F00BBAC23 /* finder.cpp */; };
@@ -84,6 +82,11 @@
 		25BAF9DE29ACF53E00BBF0DE /* plot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA802996500F00BBAC23 /* plot.cpp */; };
 		25BAF9E029ACF68300BBF0DE /* libSDL2-2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 25BAF9DF29ACF68300BBF0DE /* libSDL2-2.0.0.dylib */; };
 		25BAF9E129ACF68300BBF0DE /* libSDL2-2.0.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 25BAF9DF29ACF68300BBF0DE /* libSDL2-2.0.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		25C4CDC429B8FFF300BB25EE /* algorithms.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25C4CDC329B8FFF300BB25EE /* algorithms.cpp */; };
+		25C4CDC529B8FFF300BB25EE /* algorithms.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25C4CDC329B8FFF300BB25EE /* algorithms.cpp */; };
+		25C4CDC629B8FFF300BB25EE /* algorithms.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25C4CDC329B8FFF300BB25EE /* algorithms.cpp */; };
+		25C4CDC729B8FFF300BB25EE /* algorithms.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25C4CDC329B8FFF300BB25EE /* algorithms.cpp */; };
+		25C4CDC829B8FFF300BB25EE /* algorithms.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25C4CDC329B8FFF300BB25EE /* algorithms.cpp */; };
 		25E6114229967DEF005A9966 /* device.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 25E6114029967DEF005A9966 /* device.cpp */; };
 		25E667D829A7CCBE000B9DC3 /* libfmt.9.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 25E667D729A7CCBE000B9DC3 /* libfmt.9.1.0.dylib */; };
 		25E667D929A7CCBE000B9DC3 /* libfmt.9.1.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 25E667D729A7CCBE000B9DC3 /* libfmt.9.1.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -274,6 +277,8 @@
 		25BAF9C029ACF3C400BBF0DE /* libcairomm-1.16.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libcairomm-1.16.1.dylib"; path = "../../../../usr/local/Cellar/cairomm/1.16.2/lib/libcairomm-1.16.1.dylib"; sourceTree = "<group>"; };
 		25BAF9DC29ACF48000BBF0DE /* IPTSShow */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = IPTSShow; sourceTree = BUILT_PRODUCTS_DIR; };
 		25BAF9DF29ACF68300BBF0DE /* libSDL2-2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libSDL2-2.0.0.dylib"; path = "../../../../usr/local/Cellar/sdl2/2.26.3/lib/libSDL2-2.0.0.dylib"; sourceTree = "<group>"; };
+		25C4CDC229B8FFF300BB25EE /* algorithms.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = algorithms.hpp; sourceTree = "<group>"; };
+		25C4CDC329B8FFF300BB25EE /* algorithms.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = algorithms.cpp; sourceTree = "<group>"; };
 		25E6114029967DEF005A9966 /* device.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = device.cpp; sourceTree = "<group>"; };
 		25E6114129967DEF005A9966 /* device.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = device.hpp; sourceTree = "<group>"; };
 		25E6114329967E30005A9966 /* IPTSKenerlUserShared.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IPTSKenerlUserShared.h; sourceTree = "<group>"; };
@@ -437,6 +442,8 @@
 		2520FA682996500F00BBAC23 /* basic */ = {
 			isa = PBXGroup;
 			children = (
+				25C4CDC329B8FFF300BB25EE /* algorithms.cpp */,
+				25C4CDC229B8FFF300BB25EE /* algorithms.hpp */,
 				2520FA6B2996500F00BBAC23 /* cluster.cpp */,
 				2520FA692996500F00BBAC23 /* cluster.hpp */,
 				2520FA6A2996500F00BBAC23 /* detector.cpp */,
@@ -684,6 +691,7 @@
 				250BE67C29AC04AA00FDA782 /* reader.cpp in Sources */,
 				250BE67D29AC04AA00FDA782 /* device.cpp in Sources */,
 				250BE68029AC04AA00FDA782 /* detector.cpp in Sources */,
+				25C4CDC529B8FFF300BB25EE /* algorithms.cpp in Sources */,
 				250BE69529AC04D600FDA782 /* dump.cpp in Sources */,
 				250BE68329AC04AA00FDA782 /* parser.cpp in Sources */,
 				250BE68429AC04AA00FDA782 /* finder.cpp in Sources */,
@@ -698,8 +706,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				250BE69829AC0BDE00FDA782 /* reader.cpp in Sources */,
-				250BE69929AC0BDE00FDA782 /* device.cpp in Sources */,
 				250BE6AD29AC0C0400FDA782 /* perf.cpp in Sources */,
+				25C4CDC629B8FFF300BB25EE /* algorithms.cpp in Sources */,
 				250BE69A29AC0BDE00FDA782 /* detector.cpp in Sources */,
 				250BE69C29AC0BDE00FDA782 /* parser.cpp in Sources */,
 				250BE69D29AC0BDE00FDA782 /* finder.cpp in Sources */,
@@ -720,6 +728,7 @@
 				2520FAB12996500F00BBAC23 /* detector.cpp in Sources */,
 				2520FAB92996500F00BBAC23 /* main.cpp in Sources */,
 				2520FAB52996500F00BBAC23 /* dft.cpp in Sources */,
+				25C4CDC429B8FFF300BB25EE /* algorithms.cpp in Sources */,
 				2520FAC52996500F00BBAC23 /* parser.cpp in Sources */,
 				2520FAB32996500F00BBAC23 /* finder.cpp in Sources */,
 				2520FAC62996500F00BBAC23 /* config.cpp in Sources */,
@@ -734,9 +743,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				25BAF9A729ACE8B600BBF0DE /* reader.cpp in Sources */,
-				25BAF9A829ACE8B600BBF0DE /* device.cpp in Sources */,
 				25BAF9BF29ACF08E00BBF0DE /* visualization.cpp in Sources */,
 				25BAF9AA29ACE8B600BBF0DE /* detector.cpp in Sources */,
+				25C4CDC729B8FFF300BB25EE /* algorithms.cpp in Sources */,
 				25BAF9AB29ACE8B600BBF0DE /* parser.cpp in Sources */,
 				25BAF9AC29ACE8B600BBF0DE /* finder.cpp in Sources */,
 				25BAF9AD29ACE8B600BBF0DE /* config.cpp in Sources */,
@@ -754,6 +763,7 @@
 				25BAF9C529ACF48000BBF0DE /* reader.cpp in Sources */,
 				25BAF9C629ACF48000BBF0DE /* device.cpp in Sources */,
 				25BAF9C729ACF48000BBF0DE /* visualization.cpp in Sources */,
+				25C4CDC829B8FFF300BB25EE /* algorithms.cpp in Sources */,
 				25BAF9C929ACF48000BBF0DE /* detector.cpp in Sources */,
 				25BAF9CA29ACF48000BBF0DE /* parser.cpp in Sources */,
 				25BAF9CB29ACF48000BBF0DE /* finder.cpp in Sources */,

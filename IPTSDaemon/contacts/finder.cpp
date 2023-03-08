@@ -65,7 +65,7 @@ void ContactFinder::resize(index2_t size)
 void ContactFinder::reset()
 {
 	for (std::size_t i = 0; i < config.temporal_window; i++) {
-		std::size_t size = this->frames[i].size();
+		const std::size_t size = this->frames[i].size();
 
 		for (std::size_t j = 0; j < size; j++)
 			this->frames[i][j].active = false;
@@ -74,8 +74,8 @@ void ContactFinder::reset()
 
 bool ContactFinder::check_valid(const Contact &contact)
 {
-	f64 aspect = contact.major / contact.minor;
-	f64 major = contact.major * this->phys_diag;
+	const f64 aspect = contact.major / contact.minor;
+	const f64 major = contact.major * this->phys_diag;
 
 	if (aspect < this->config.aspect_min || aspect > this->config.aspect_max)
 		return false;
@@ -91,8 +91,8 @@ bool ContactFinder::check_dist(const Contact &from, const Contact &to)
 	// Assumption: All contacts are perfect circles. The radius is major / 2.
 	// This might cover a bit more area than neccessary, but will make implementation easier.
 
-	f64 dx = (from.x - to.x) * this->config.width;
-	f64 dy = (from.y - to.y) * this->config.height;
+	const f64 dx = (from.x - to.x) * this->config.width;
+	const f64 dy = (from.y - to.y) * this->config.height;
 
 	f64 dist = std::hypot(dx, dy);
 	dist -= (from.major * this->phys_diag) / 2;
@@ -104,14 +104,14 @@ bool ContactFinder::check_dist(const Contact &from, const Contact &to)
 const std::vector<Contact> &ContactFinder::search()
 {
 	const std::vector<Blob> &blobs = this->detector->search();
-	u32 count = std::min(gsl::narrow_cast<u32>(blobs.size()), this->config.max_contacts);
+    const u32 count = std::min(gsl::narrow_cast<u32>(blobs.size()), this->config.max_contacts);
     
     u32 actual_cnt = count;
     u32 palm_cnt = 0;
 
 	for (u32 i = 0; i < actual_cnt; i++) {
-		const auto &blob = blobs[i+palm_cnt];
-		auto &contact = this->frames[0][i];
+		const Blob &blob = blobs[i+palm_cnt];
+		Contact &contact = this->frames[0][i];
 
 		contact.x = blob.mean.x / gsl::narrow<f32>(this->size.x);
 		contact.y = blob.mean.y / gsl::narrow<f32>(this->size.y);
@@ -122,12 +122,12 @@ const std::vector<Contact> &ContactFinder::search()
 		if (this->config.invert_y)
 			contact.y = 1 - contact.y;
 
-		math::Eigen2<f64> eigen = blob.cov.eigen();
-		f64 s1 = std::sqrt(eigen.w[0]);
-		f64 s2 = std::sqrt(eigen.w[1]);
+		const math::Eigen2<f64> eigen = blob.cov.eigen();
+		const f64 s1 = std::sqrt(eigen.w[0]);
+		const f64 s2 = std::sqrt(eigen.w[1]);
 
-		f64 d1 = s1 / this->data_diag;
-		f64 d2 = s2 / this->data_diag;
+		const f64 d1 = s1 / this->data_diag;
+		const f64 d2 = s2 / this->data_diag;
 
 		contact.major = std::max(d1, d2);
 		contact.minor = std::min(d1, d2);
@@ -137,7 +137,7 @@ const std::vector<Contact> &ContactFinder::search()
 		contact.major *= 2;
 		contact.minor *= 2;
 
-		math::Vec2<f64> v = eigen.v[0].cast<f64>() * s1;
+		const math::Vec2<f64> v = eigen.v[0].cast<f64>() * s1;
 		f64 angle = std::atan2(v.x, v.y) + (math::num<f64>::pi / 2);
 
 		// It is not possible to say if the contact faces up or down,
@@ -167,7 +167,7 @@ const std::vector<Contact> &ContactFinder::search()
 	}
 
 	for (u32 i = count; i < this->config.max_contacts; i++) {
-		auto &contact = this->frames[0][i];
+        Contact &contact = this->frames[0][i];
 
 		contact.index = i;
 		contact.active = false;
@@ -184,9 +184,9 @@ const std::vector<Contact> &ContactFinder::search()
 
 	// Mark contacts that are very close to an invalid contact as unstable
     for (u32 i = actual_cnt; i < count; i++) {
-        const auto &contact = this->frames[0][i];
+        const Contact &contact = this->frames[0][i];
         for (u32 j = 0; j < actual_cnt; j++) {
-            auto &other = this->frames[0][j];
+            Contact &other = this->frames[0][j];
 			if (!this->check_dist(contact, other))
 				continue;
 
@@ -220,14 +220,13 @@ void ContactFinder::track(u32 &touch_cnt)
 	// Calculate the distances between current and previous valid inputs
 	for (u32 i = 0; i < touch_cnt; i++) {
 		for (u32 j = 0; j < this->last_touch_cnt; j++) {
-			const auto &in = this->frames[0][i];
-			const auto &last = this->frames[1][j];
+			const Contact &in = this->frames[0][i];
+			const Contact &last = this->frames[1][j];
+            
+            const f64 dx = in.x - last.x;
+            const f64 dy = in.y - last.y;
 
-			u32 idx = i * this->last_touch_cnt + j;
-
-			f64 dx = in.x - last.x;
-			f64 dy = in.y - last.y;
-
+            u32 idx = i * this->last_touch_cnt + j;
 			this->distances[idx] = std::hypot(dx, dy);
 		}
 	}
@@ -245,8 +244,8 @@ void ContactFinder::track(u32 &touch_cnt)
 		u32 i = idx / this->last_touch_cnt;
 		u32 j = idx % this->last_touch_cnt;
 
-		auto &contact = this->frames[0][i];
-		const auto &last = this->frames[1][j];
+		Contact &contact = this->frames[0][i];
+		const Contact &last = this->frames[1][j];
 
         idx_used |= 1 << last.index;
         
@@ -254,16 +253,16 @@ void ContactFinder::track(u32 &touch_cnt)
         contact.instability += last.instability;
         contact.tracked = true;
 
-		f64 dmaj = (contact.major - last.major) * this->phys_diag;
-		f64 dmin = (contact.minor - last.minor) * this->phys_diag;
+		const f64 dmaj = (contact.major - last.major) * this->phys_diag;
+		const f64 dmin = (contact.minor - last.minor) * this->phys_diag;
 
 		// Is the contact rapidly increasing its size?
 		if (dmaj >= this->config.size_thresh || dmin >= this->config.size_thresh)
             contact.instability+=2;
 
-		f64 dx = (contact.x - last.x) * this->config.width;
-		f64 dy = (contact.y - last.y) * this->config.height;
-		f64 dist = std::hypot(dx, dy);
+		const f64 dx = (contact.x - last.x) * this->config.width;
+		const f64 dy = (contact.y - last.y) * this->config.height;
+		const f64 dist = std::hypot(dx, dy);
 
         if (dist > this->config.position_thresh_max) {
             // Mark large position changes as unstable to prevent contacts

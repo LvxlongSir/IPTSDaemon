@@ -30,9 +30,9 @@ static void iptsd_plot_handle_input(const Cairo::RefPtr<Cairo::Context> &cairo, 
 	finder.resize(index2_t {data.dim.width, data.dim.height});
 
 	// Normalize and invert the heatmap data.
-	std::transform(data.data.begin(), data.data.end(), finder.data().begin(), [&](auto v) {
-		f32 val = static_cast<f32>(v - data.dim.z_min) /
-			  static_cast<f32>(data.dim.z_max - data.dim.z_min);
+	std::transform(data.data.begin(), data.data.end(), finder.data().begin(), [&](f32 v) {
+		const f32 val = (v - static_cast<f32>(data.dim.z_min)) /
+				static_cast<f32>(data.dim.z_max - data.dim.z_min);
 
 		return 1.0f - val;
 	});
@@ -87,7 +87,7 @@ static int main(char *dump_file, char *plot_dir)
 			     u[9], u[10], u[11], u[12], u[13], u[14], u[15]);
 	}
 
-	config::Config config {header.vendor, header.product, meta};
+	const config::Config config {header.vendor, header.product, meta};
 
 	// Check if a config was found
 	if (config.width == 0 || config.height == 0)
@@ -97,18 +97,18 @@ static int main(char *dump_file, char *plot_dir)
 	contacts::ContactFinder finder {config.contacts()};
 
 	index2_t rsize {};
-	f64 aspect = config.width / config.height;
+	const f64 aspect = config.width / config.height;
 
 	// Determine the output resolution
 	rsize.y = 1000;
 	rsize.x = gsl::narrow<int>(std::round(aspect * rsize.y));
 
 	// Create a texture for drawing
-	auto drawtex = Cairo::ImageSurface::create(Cairo::ImageSurface::Format::ARGB32, rsize.x, rsize.y);
-	auto cairo = Cairo::Context::create(drawtex);
+    const Cairo::RefPtr<Cairo::ImageSurface> drawtex = Cairo::ImageSurface::create(Cairo::ImageSurface::Format::ARGB32, rsize.x, rsize.y);
+    const Cairo::RefPtr<Cairo::Context> cairo = Cairo::Context::create(drawtex);
 
 	ipts::Parser parser {};
-	parser.on_heatmap = [&](const auto &data) {
+	parser.on_heatmap = [&](const ipts::Heatmap &data) {
 		iptsd_plot_handle_input(cairo, rsize, vis, finder, data);
 	};
 

@@ -1,3 +1,9 @@
+// Disable access checks for the entire advanced detector,
+// unless the user forces access checks to be enabled.
+#if defined(_GLIBCXX_ASSERTIONS) && !defined(IPTSD_CONFIG_FORCE_ACCESS_CHECKS)
+#undef _GLIBCXX_ASSERTIONS
+#endif
+
 #include "detector.hpp"
 
 #include "../neutral.hpp"
@@ -58,8 +64,8 @@ BlobDetector::BlobDetector(index2_t size, BlobDetectorConfig config)
     , m_gf_window{11, 11}
     , m_touchpoints{}
 {
-    std::less<alg::wdt::QItem<f32>> op {};
-    std::vector<alg::wdt::QItem<f32>> buf {512};
+    const std::less<alg::wdt::QItem<f32>> op {};
+    const std::vector<alg::wdt::QItem<f32>> buf {512};
 
     m_wdt_queue = std::priority_queue { op, buf };
 
