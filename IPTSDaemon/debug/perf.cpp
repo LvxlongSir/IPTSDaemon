@@ -60,7 +60,6 @@ static int main(char *dump_file)
 	if (has_meta) {
         IPTSDeviceMetaData m {};
 		ifs.read(reinterpret_cast<char *>(&m), sizeof(m));
-
 		meta = m;
 	}
 

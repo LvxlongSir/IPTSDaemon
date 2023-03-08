@@ -57,7 +57,6 @@ static int main(char *dump_file, char *plot_dir)
 
 	struct debug::iptsd_dump_header header {};
 
-	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
 	ifs.read(reinterpret_cast<char *>(&header), sizeof(header));
 
 	char has_meta = 0;
@@ -67,10 +66,7 @@ static int main(char *dump_file, char *plot_dir)
 	std::optional<IPTSDeviceMetaData> meta = std::nullopt;
 	if (has_meta) {
         IPTSDeviceMetaData m {};
-
-		// NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
 		ifs.read(reinterpret_cast<char *>(&m), sizeof(m));
-
 		meta = m;
 	}
 

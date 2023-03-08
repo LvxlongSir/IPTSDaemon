@@ -30,7 +30,6 @@
 		250BE69F29AC0BDE00FDA782 /* cluster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA6B2996500F00BBAC23 /* cluster.cpp */; };
 		250BE6A029AC0BDE00FDA782 /* detector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA552996500F00BBAC23 /* detector.cpp */; };
 		250BE6A229AC0BDE00FDA782 /* libfmt.9.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 25E667D729A7CCBE000B9DC3 /* libfmt.9.1.0.dylib */; };
-		250BE6A329AC0BDE00FDA782 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2520FAC82996510000BBAC23 /* IOKit.framework */; };
 		250BE6A429AC0BDE00FDA782 /* libinih.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 25526E492996D1A300F61021 /* libinih.0.dylib */; };
 		250BE6A729AC0BDE00FDA782 /* libfmt.9.1.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 25E667D729A7CCBE000B9DC3 /* libfmt.9.1.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		250BE6A829AC0BDE00FDA782 /* libinih.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 25526E492996D1A300F61021 /* libinih.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -59,7 +58,6 @@
 		25BAF9AE29ACE8B600BBF0DE /* cluster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA6B2996500F00BBAC23 /* cluster.cpp */; };
 		25BAF9AF29ACE8B600BBF0DE /* detector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2520FA552996500F00BBAC23 /* detector.cpp */; };
 		25BAF9B129ACE8B600BBF0DE /* libfmt.9.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 25E667D729A7CCBE000B9DC3 /* libfmt.9.1.0.dylib */; };
-		25BAF9B229ACE8B600BBF0DE /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2520FAC82996510000BBAC23 /* IOKit.framework */; };
 		25BAF9B329ACE8B600BBF0DE /* libinih.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 25526E492996D1A300F61021 /* libinih.0.dylib */; };
 		25BAF9B629ACE8B600BBF0DE /* libfmt.9.1.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 25E667D729A7CCBE000B9DC3 /* libfmt.9.1.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		25BAF9B729ACE8B600BBF0DE /* libinih.0.dylib in Embed Libraries */ = {isa = PBXBuildFile; fileRef = 25526E492996D1A300F61021 /* libinih.0.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -298,7 +296,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				250BE6A229AC0BDE00FDA782 /* libfmt.9.1.0.dylib in Frameworks */,
-				250BE6A329AC0BDE00FDA782 /* IOKit.framework in Frameworks */,
 				250BE6A429AC0BDE00FDA782 /* libinih.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -318,7 +315,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				25BAF9B129ACE8B600BBF0DE /* libfmt.9.1.0.dylib in Frameworks */,
-				25BAF9B229ACE8B600BBF0DE /* IOKit.framework in Frameworks */,
 				25BAF9C129ACF3C400BBF0DE /* libcairomm-1.16.1.dylib in Frameworks */,
 				25BAF9B329ACE8B600BBF0DE /* libinih.0.dylib in Frameworks */,
 			);
@@ -370,8 +366,8 @@
 				2520FA6F2996500F00BBAC23 /* daemon */,
 				2520FA7F2996500F00BBAC23 /* debug */,
 				2520FA4C2996500F00BBAC23 /* gfx */,
-				2520FAA22996500F00BBAC23 /* ipts */,
 				2520FA9A2996500F00BBAC23 /* math */,
+				2520FAA22996500F00BBAC23 /* ipts */,
 				2520F9CE29964F6D00BBAC23 /* IPTSDaemon.entitlements */,
 			);
 			path = IPTSDaemon;
@@ -650,6 +646,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1410;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
 					2520F9C329964EA300BBAC23 = {

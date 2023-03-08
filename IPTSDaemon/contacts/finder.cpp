@@ -191,11 +191,6 @@ const std::vector<Contact> &ContactFinder::search()
 				continue;
 
             other.instability++;
-            if (j != actual_cnt-1) {
-                std::swap(other, this->frames[0][actual_cnt-1]);
-                j--;
-            }
-            actual_cnt--;
 		}
 	}
 

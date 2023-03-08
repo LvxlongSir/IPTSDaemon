@@ -24,7 +24,6 @@ Cairo::RefPtr<Cairo::ImageSurface> image_surface_create(container::Image<Argb> &
 	auto const format = Cairo::ImageSurface::Format::ARGB32;
 	auto const size = image.size();
 
-	// NOLINTNEXTLINE(cppcoreguidelines-pro-type-reinterpret-cast)
 	auto const data = reinterpret_cast<u8 *>(image.data());
 
 	auto const stride = Cairo::ImageSurface::format_stride_for_width(format, size.x);

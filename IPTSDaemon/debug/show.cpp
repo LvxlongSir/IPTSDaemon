@@ -75,8 +75,7 @@ static int main()
 	SDL_Renderer *renderer = nullptr;
 
 	// Create an SDL window
-	SDL_CreateWindowAndRenderer(0, 0, SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_ALLOW_HIGHDPI,
-				    &window, &renderer);
+	SDL_CreateWindowAndRenderer(0, 0, SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_ALLOW_HIGHDPI, &window, &renderer);
 
 	index2_t rsize {};
 	SDL_GetRendererOutputSize(renderer, &rsize.x, &rsize.y);
