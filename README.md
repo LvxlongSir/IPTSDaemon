@@ -30,6 +30,7 @@ All possible configurations are in `iptsd.conf`, you can tweak IPTSDaemon accord
 ### Enable on screen keyboard on login screen
 
 To enable the on screen keyboard to show up on the login screen you need to change your Accessibility settings in the `System Preferences>Users & Groups>Login Options>Accessibility Options` put a checkbox on the `Accessibility Keyboard`.
+Ventura:Change your Accessibility settings in the `System Preferences>Lock Screen>Accessibility Options` put a checkbox on the `Accessibility Keyboard`.
 
 ### Trouble shooting
 
