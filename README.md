@@ -1,3 +1,4 @@
-For source pls visit: https://github.com/Xiashangning/IPTSDaemon
+For source pls visit: https://github.com/Xiashangning/IPTSDaemon Thanks to author.
 
-This fork only tuned iptsd.conf parameters for SP7 (surface pro 7). Try operate on screen with multi-gestures and three fingure drag&drop.
+This fork only tuned iptsd.conf parameters for SP7 (surface pro 7). 
+Try operate on screen with multi-gestures and three fingures drag&drop.
